@@ -1,91 +1,75 @@
-import {
-    state,
-    FILTERS
-} from "./state.js";
+import { state, FILTERS, SORTS, PRIORITY_ORDER } from "./state.js";
 
-const taskList =
-    document.getElementById("taskList");
+const taskList = document.getElementById("taskList");
 
-const filterContainer =
-    document.querySelector(".filter-container");
+const filterContainer = document.querySelector(".filter-container");
 
 export function renderTasks() {
-
-    if (state.tasks.length === 0) {
-
-        taskList.innerHTML = `
+  if (state.tasks.length === 0) {
+    taskList.innerHTML = `
             <p class="empty-state">
                 No tasks available.
                 Add a new task to get started!
             </p>
         `;
 
-        return;
+    return;
+  }
+
+  const filteredTasks = state.tasks.filter((task) => {
+    const matchesSearch = task.title.toLowerCase().includes(state.searchTerm);
+
+    const matchesFilter =
+      state.currentFilter === FILTERS.ALL ||
+      (state.currentFilter === FILTERS.COMPLETED && task.completed) ||
+      (state.currentFilter === FILTERS.PENDING && !task.completed);
+
+    return matchesSearch && matchesFilter;
+  });
+
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+    switch (state.currentSort) {
+      case SORTS.NEWEST:
+        return b.createdAt - a.createdAt;
+
+      case SORTS.ALPHABETICAL:
+        return a.title.localeCompare(b.title);
+
+      case SORTS.COMPLETED:
+        return a.completed - b.completed;
+      case SORTS.PRIORITY:
+        const priorityOrder = PRIORITY_ORDER;
+        return priorityOrder[b.priority] - priorityOrder[a.priority];
+      default:
+        return 0;
     }
+  });
 
-    const filteredTasks =
-        state.tasks.filter(task => {
-
-            const matchesSearch =
-                task.title
-                    .toLowerCase()
-                    .includes(state.searchTerm);
-
-            const matchesFilter =
-
-                state.currentFilter ===
-                FILTERS.ALL ||
-
-                (
-                    state.currentFilter ===
-                    FILTERS.COMPLETED &&
-                    task.completed
-                ) ||
-
-                (
-                    state.currentFilter ===
-                    FILTERS.PENDING &&
-                    !task.completed
-                );
-
-            return (
-                matchesSearch &&
-                matchesFilter
-            );
-        });
-
-    if (filteredTasks.length === 0) {
-
-        taskList.innerHTML = `
+  if (sortedTasks.length === 0) {
+    taskList.innerHTML = `
             <p class="empty-state">
                 No matching tasks found
             </p>
         `;
 
-        return;
-    }
+    return;
+  }
 
-    const fragment =
-        document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
-    filteredTasks.forEach(task => {
+  sortedTasks.forEach((task) => {
+    fragment.appendChild(createTaskElement(task));
+  });
 
-        fragment.appendChild(
-            createTaskElement(task)
-        );
-    });
-
-    taskList.replaceChildren(fragment);
+  taskList.replaceChildren(fragment);
 }
 
 export function createTaskElement(task) {
+  const div = document.createElement("div");
 
-    const div =
-        document.createElement("div");
+  div.className = "task-item";
 
-    div.className = "task-item";
-
-    div.innerHTML = `
+  div.innerHTML = `
 
         <div class="task-content">
 
@@ -97,8 +81,7 @@ export function createTaskElement(task) {
             />
 
             ${
-                task.isEditing
-
+              task.isEditing
                 ? `
 
                     <input
@@ -108,17 +91,20 @@ export function createTaskElement(task) {
                     />
 
                 `
-
                 : `
 
                     <span
-                        class="${
-                            task.completed
-                            ? "completed"
-                            : ""
-                        }"
+                        class="${task.completed ? "completed" : ""}"
                     >
                         ${task.title}
+                    </span>
+                    <span
+                    class="
+                            priority-badge
+                            ${task.priority}
+                        "
+                    >
+                        ${task.priority}
                     </span>
 
                 `
@@ -129,18 +115,10 @@ export function createTaskElement(task) {
         <div class="task-actions">
 
             <button
-                class="${
-                    task.isEditing
-                    ? "save-btn"
-                    : "edit-btn"
-                }"
+                class="${task.isEditing ? "save-btn" : "edit-btn"}"
                 data-id="${task.id}"
             >
-                ${
-                    task.isEditing
-                    ? "Save"
-                    : "Edit"
-                }
+                ${task.isEditing ? "Save" : "Edit"}
             </button>
 
             <button
@@ -153,36 +131,26 @@ export function createTaskElement(task) {
         </div>
     `;
 
-    return div;
+  return div;
 }
 
 export function renderFilters() {
+  filterContainer.innerHTML = "";
 
-    filterContainer.innerHTML = "";
+  const filters = Object.values(FILTERS);
 
-    const filters =
-        Object.values(FILTERS);
+  filters.forEach((filter) => {
+    const button = document.createElement("button");
 
-    filters.forEach(filter => {
-
-        const button =
-            document.createElement("button");
-
-        button.className = `
+    button.className = `
             filter-btn
-            ${
-                state.currentFilter === filter
-                ? "active"
-                : ""
-            }
+            ${state.currentFilter === filter ? "active" : ""}
         `;
 
-        button.dataset.filter = filter;
+    button.dataset.filter = filter;
 
-        button.textContent =
-            filter.charAt(0).toUpperCase() +
-            filter.slice(1);
+    button.textContent = filter.charAt(0).toUpperCase() + filter.slice(1);
 
-        filterContainer.appendChild(button);
-    });
+    filterContainer.appendChild(button);
+  });
 }

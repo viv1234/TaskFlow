@@ -1,86 +1,69 @@
 import { updateUI } from "./ui.js";
 
 import {
-    addTask,
-    deleteTask,
-    toggleTask,
-    editTask,
-    saveTask
+  addTask,
+  deleteTask,
+  toggleTask,
+  editTask,
+  saveTask,
 } from "./taskService.js";
 
-const taskInput =
-    document.getElementById("taskInput");
+const taskInput = document.getElementById("taskInput");
+const prioritySelect = document.getElementById("prioritySelect");
 
 export function handleDelete(target) {
+  const taskId = target.dataset.id;
 
-    const taskId = target.dataset.id;
+  const isDeleted = deleteTask(taskId);
 
-    const isDeleted =
-        deleteTask(taskId);
+  if (!isDeleted) return;
 
-    if (!isDeleted) return;
-
-    updateUI();
+  updateUI();
 }
 
 export function handleAddTask() {
+  const isAdded = addTask(taskInput.value, prioritySelect.value);
 
-    const isAdded =
-        addTask(taskInput.value);
+  if (!isAdded) return;
 
-    if (!isAdded) return;
+  taskInput.value = "";
+  prioritySelect.value = "medium";
 
-    taskInput.value = "";
-
-    updateUI();
+  updateUI();
 }
 
 export function handleToggle(target) {
+  const taskId = target.dataset.id;
 
-    const taskId = target.dataset.id;
+  const isToggled = toggleTask(taskId, target.checked);
 
-    const isToggled =
-        toggleTask(
-            taskId,
-            target.checked
-        );
+  if (!isToggled) return;
 
-    if (!isToggled) return;
-
-    updateUI();
+  updateUI();
 }
 
 export function handleEdit(target) {
+  const taskId = target.dataset.id;
 
-    const taskId = target.dataset.id;
+  const isEditing = editTask(taskId);
 
-    const isEditing =
-        editTask(taskId);
+  if (!isEditing) return;
 
-    if (!isEditing) return;
-
-    updateUI();
+  updateUI();
 }
 
 export function handleSaveTask(target) {
+  const taskId = target.dataset.id;
 
-    const taskId = target.dataset.id;
+  const taskItem = target.closest(".task-item");
 
-    const taskItem =
-        target.closest(".task-item");
+  const editInput = taskItem.querySelector(".edit-input");
 
-    const editInput =
-        taskItem.querySelector(".edit-input");
+  if (!editInput) return;
 
-    if (!editInput) return;
+  const isSaved = saveTask(taskId, editInput.value);
 
-    const isSaved =
-        saveTask(
-            taskId,
-            editInput.value
-        );
+  if (!isSaved) return;
 
-    if (!isSaved) return;
-
-    updateUI();
+  updateUI();
 }

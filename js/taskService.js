@@ -1,6 +1,6 @@
 import { state } from "./state.js";
 
-export function addTask(title = "") {
+export function addTask(title = "", priority = "medium") {
 
     const trimmedTitle = title.trim();
 
@@ -9,8 +9,10 @@ export function addTask(title = "") {
     state.tasks.push({
         id: crypto.randomUUID(),
         title: trimmedTitle,
+        priority,
         completed: false,
-        isEditing: false
+        isEditing: false,
+        createdAt: Date.now()
     });
 
     return true;
@@ -80,8 +82,10 @@ export function saveTask(
     if (!trimmedTitle) return false;
 
     task.title = trimmedTitle;
+    task.updatedAt = Date.now();
 
     task.isEditing = false;
 
     return true;
 }
+

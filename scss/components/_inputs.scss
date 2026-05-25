@@ -1,0 +1,66 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.task-input-container{
+  @include flex(20px, center);
+}
+
+#taskInput,
+.edit-input,
+.search-input,
+.sort-select {
+  border: 1px solid $color-border;
+
+  border-radius: $radius-sm;
+
+  outline: none;
+
+  transition: $transition;
+}
+
+#taskInput,
+.edit-input,
+.search-input {
+  flex: 1;
+
+  padding: 12px 14px;
+
+  font-size: 15px;
+}
+
+.search-input-container {
+  margin: 20px 0;
+}
+
+.search-input {
+  width: 100%;
+}
+
+#taskInput:focus,
+.edit-input:focus,
+.sort-select:focus {
+  border-color: $color-dark;
+}
+
+#prioritySelect {
+
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid $color-border;
+
+  border-radius: $radius-sm;
+
+  background: $color-light;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition: $transition;
+
+  &:focus {
+    border-color: $color-dark;
+  }
+}

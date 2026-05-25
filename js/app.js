@@ -13,7 +13,8 @@ import {
 
 import {
     setSearchTerm,
-    setCurrentFilter
+    setCurrentFilter,
+    setCurrentSort
 } from "./state.js";
 
 const taskWrapper =
@@ -85,6 +86,12 @@ taskWrapper.addEventListener(
         ) {
 
             handleToggle(target);
+        }
+        if(target.id === "sortSelect") {
+            setCurrentSort(
+                target.value
+            );
+            renderTasks();
         }
     }
 );

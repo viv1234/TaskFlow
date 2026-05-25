@@ -20,15 +20,37 @@
 
                 <input type="text" id="taskInput" placeholder="Enter a new task..." autocomplete="off" />
 
+                <select id="prioritySelect">
+
+                    <option value="high">
+                        High
+                    </option>
+
+                    <option value="medium" selected>
+                        Medium
+                    </option>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                </select>
                 <button id="addTaskBtn">
                     Add Task
                 </button>
 
             </div>
             <div class="search-input-container">
+
                 <input type="text" id="searchInput" class="search-input" placeholder="Search tasks..."
                     autocomplete="off" />
+
+            </div>
+
+            <div class="controls-container">
+
                 <div class="filter-container">
+
                     <button class="filter-btn active" data-filter="all">
                         All
                     </button>
@@ -40,9 +62,37 @@
                     <button class="filter-btn" data-filter="pending">
                         Pending
                     </button>
-                </div>
-            </div>
 
+                </div>
+
+                <div class="sort-container">
+
+                    <label for="sortSelect">
+                        Sort by:
+                    </label>
+
+                    <select id="sortSelect" class="sort-select">
+
+                        <option value="newest">
+                            Newest
+                        </option>
+
+                        <option value="alphabetical">
+                            Alphabetical
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+                        <option value="priority">
+                            Priority
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
             <div class="task-list" id="taskList"></div>
 
         </section>

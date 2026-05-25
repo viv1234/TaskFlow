@@ -1,0 +1,47 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+button,
+.filter-btn,
+.sort-select {
+  cursor: pointer;
+
+  transition: $transition;
+}
+
+button {
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: $radius-sm;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  &:hover {
+    @include hover-lift;
+  }
+}
+
+#addTaskBtn,
+.edit-btn,
+.save-btn {
+  background: $color-dark;
+  color: $color-light;
+}
+
+.delete-btn {
+  background: $color-danger;
+  color: $color-light;
+}
+
+#addTaskBtn,
+.edit-btn,
+.save-btn,
+.delete-btn {
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

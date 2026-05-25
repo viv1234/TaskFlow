@@ -1,0 +1,16 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "Task management application built using Vanilla JavaScript with modular architecture and state-driven UI rendering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass scss/style.scss style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.100.0"
+  }
+}
