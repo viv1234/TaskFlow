@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TaskFlow Pro</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <main class="app">
+
+        <section id="taskWrapper">
+
+            <div class="task-input-container">
+
+                <input type="text" id="taskInput" placeholder="Enter a new task..." autocomplete="off" />
+
+                <button id="addTaskBtn">
+                    Add Task
+                </button>
+
+            </div>
+            <div class="search-input-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search tasks..."
+                    autocomplete="off" />
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">
+                        All
+                    </button>
+
+                    <button class="filter-btn" data-filter="completed">
+                        Completed
+                    </button>
+
+                    <button class="filter-btn" data-filter="pending">
+                        Pending
+                    </button>
+                </div>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>
