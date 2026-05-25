@@ -96,7 +96,7 @@ TaskFlow/
 └── README.md
 
 
-Installation
+#Installation
 
 Clone the repository:
 
@@ -109,7 +109,7 @@ npm install
 Run Sass watcher:
 
 npm run sass
-Future Improvements
+#Future Improvements
 Due Date System
 Drag & Drop Tasks
 Toast Notifications
@@ -119,7 +119,7 @@ Vite Integration
 Reusable Utility Extraction
 Learning Goals Behind This Project
 
-This project was built to strengthen understanding of:
+#This project was built to strengthen understanding of:
 
 DOM Manipulation
 State Management
@@ -131,5 +131,5 @@ Data Transformation Pipelines
 Scalable UI Patterns
 Author
 
-Vivek Pandey
+#Vivek Pandey
 Senior Frontend Developer | Angular Developer
