@@ -95,8 +95,10 @@ TaskFlow/
 ├── package.json
 └── README.md
 
+```
+---
 
-#Installation
+# Installation
 
 Clone the repository:
 
@@ -109,27 +111,35 @@ npm install
 Run Sass watcher:
 
 npm run sass
-#Future Improvements
-Due Date System
-Drag & Drop Tasks
-Toast Notifications
-Dark Mode
-Category Management
-Vite Integration
-Reusable Utility Extraction
-Learning Goals Behind This Project
 
-#This project was built to strengthen understanding of:
+---
 
-DOM Manipulation
-State Management
-Frontend Architecture
-Modular JavaScript
-SCSS Structure
-Event Handling
-Data Transformation Pipelines
-Scalable UI Patterns
-Author
+# Future Improvements
 
-#Vivek Pandey
-Senior Frontend Developer | Angular Developer
+- Due Date System
+- Drag & Drop Tasks
+- Toast Notifications
+- Dark Mode
+- Category Management
+- Vite Integration
+- Reusable Utility Extraction
+- Learning Goals Behind This Project
+
+----
+
+# This project was built to strengthen understanding of:
+
+- DOM Manipulation
+- State Management
+- Frontend Architecture
+- Modular JavaScript
+- SCSS Structure
+- Event Handling
+- Data Transformation Pipelines
+- Scalable UI Patterns
+---
+
+# Author
+- Vivek Pandey
+- Senior Frontend Developer | Angular Developer
+---
